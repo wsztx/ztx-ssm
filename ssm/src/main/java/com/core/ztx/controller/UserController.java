@@ -19,12 +19,10 @@ public class UserController {
 	private UserService userService;
 	
 	@RequestMapping("/test")
-	public String test(){
-		try {
-			userService.insertTest();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+	public String test() throws Exception{
+		userService.insertTest();
+		int a = 3/0;
+		System.out.println(a);
 		return "index";
 	}
 
