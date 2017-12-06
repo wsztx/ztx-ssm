@@ -16,21 +16,21 @@
             <property name="forceBigDecimals" value="false" />  
         </javaTypeResolver>  
         <!-- 生成模型的包名和位置 -->  
-        <javaModelGenerator targetPackage="com.core.ztx.entity" targetProject="F:\test\generator\src">  
+        <javaModelGenerator targetPackage="com.core.ztx.entity" targetProject="D:\repository\git\ztx-ssm\generator\src">  
             <property name="enableSubPackages" value="true" />  
             <property name="trimStrings" value="true" />  
         </javaModelGenerator>  
         <!-- 生成的映射文件包名和位置 -->  
-        <sqlMapGenerator targetPackage="com.core.ztx.mapping" targetProject="F:\test\generator\src">  
+        <sqlMapGenerator targetPackage="com.core.ztx.mapping" targetProject="D:\repository\git\ztx-ssm\generator\src">  
             <property name="enableSubPackages" value="true" />  
         </sqlMapGenerator>  
         <!-- 生成DAO的包名和位置 -->  
-        <javaClientGenerator type="XMLMAPPER" targetPackage="com.core.ztx.dao" targetProject="F:\test\generator\src">
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.core.ztx.mapper" targetProject="D:\repository\git\ztx-ssm\generator\src">
             <property name="enableSubPackages" value="true" />  
         </javaClientGenerator>
         <!-- 多个表直接复制下面的，更改tableName和domainObjectName就可以-->  
-        <table tableName="USER" domainObjectName="User">
-		    <property name="useActualColumnNames" value="true"/>
+        <table tableName="member" domainObjectName="Member" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+		    <property name="useActualColumnNames" value="false"/>
             <generatedKey column="id" sqlStatement="MySql" identity="true"/>
 		</table>
     </context>  
