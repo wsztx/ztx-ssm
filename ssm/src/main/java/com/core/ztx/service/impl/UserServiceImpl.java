@@ -3,8 +3,8 @@ package com.core.ztx.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.core.ztx.dao.UserMapper;
 import com.core.ztx.entity.User;
+import com.core.ztx.mapper.UserMapper;
 import com.core.ztx.service.UserService;
 
 @Service

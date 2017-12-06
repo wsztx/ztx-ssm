@@ -2,8 +2,8 @@ package com.core.ztx.test;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.core.ztx.dao.UserMapper;
 import com.core.ztx.entity.User;
+import com.core.ztx.mapper.UserMapper;
 
 public class Test extends BaseJunit4Test {
 
