@@ -17,4 +17,9 @@ public class RootController {
 	public String login(){
 		return "index";
 	}
+	
+	@RequestMapping("/")
+	public String homeView(){
+		return "index";
+	}
 }

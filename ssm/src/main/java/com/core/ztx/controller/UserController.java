@@ -21,8 +21,6 @@ public class UserController {
 	@RequestMapping("/test")
 	public String test() throws Exception{
 		userService.insertTest();
-		int a = 3/0;
-		System.out.println(a);
 		return "index";
 	}
 

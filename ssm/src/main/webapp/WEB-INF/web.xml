@@ -4,6 +4,10 @@
          id="WebApp_ID" version="2.5">
     <display-name>ssm</display-name>
     
+    <welcome-file-list>  
+        <welcome-file>resources/views/index.html</welcome-file>  
+    </welcome-file-list> 
+    
     <filter>
         <filter-name>encodingFilter</filter-name>
         <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
