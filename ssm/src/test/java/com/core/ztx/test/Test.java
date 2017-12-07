@@ -1,7 +1,7 @@
 package com.core.ztx.test;
 
+import com.core.ztx.dao.mapper.UserMapper;
 import com.core.ztx.entity.User;
-import com.core.ztx.mapper.UserMapper;
 import com.core.ztx.util.spring.SpringApplicationContextUtils;
 
 public class Test extends BaseJunit4Test {
