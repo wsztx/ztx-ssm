@@ -18,5 +18,6 @@ public class UserServiceImpl implements UserService {
     	User user2 = new User("李四", "123456");
     	userMapper.insert(user2);
     	System.out.println(user2.toString());
+    	throw new RuntimeException("test");
 	}
 }
