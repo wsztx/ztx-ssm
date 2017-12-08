@@ -7,6 +7,8 @@ public class User {
 
     private String loginPass;
 
+    private Long orgId;
+
     private String sts;
 
     public Long getId() {
@@ -33,6 +35,14 @@ public class User {
         this.loginPass = loginPass == null ? null : loginPass.trim();
     }
 
+    public Long getOrgId() {
+        return orgId;
+    }
+
+    public void setOrgId(Long orgId) {
+        this.orgId = orgId;
+    }
+
     public String getSts() {
         return sts;
     }
@@ -40,11 +50,4 @@ public class User {
     public void setSts(String sts) {
         this.sts = sts == null ? null : sts.trim();
     }
-
-	public User(String loginName, String loginPass) {
-		super();
-		this.loginName = loginName;
-		this.loginPass = loginPass;
-	}
-    
 }

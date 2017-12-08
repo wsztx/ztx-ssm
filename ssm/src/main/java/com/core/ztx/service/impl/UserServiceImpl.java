@@ -15,9 +15,11 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void insertTest()  {
-    	User user2 = new User("李四", "123456");
-    	userMapper.insert(user2);
-    	System.out.println(user2.toString());
+    	User user = new User();
+    	user.setLoginName("李四");
+    	user.setLoginPass("123456");
+    	userMapper.insert(user);
+    	System.out.println(user.toString());
     	throw new RuntimeException("test");
 	}
 }

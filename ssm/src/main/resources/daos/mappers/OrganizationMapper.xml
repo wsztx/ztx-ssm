@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.core.ztx.dao.mapper.UserMapper">
-  <resultMap id="BaseResultMap" type="com.core.ztx.entity.User">
+<mapper namespace="com.core.ztx.dao.mapper.OrganizationMapper">
+  <resultMap id="BaseResultMap" type="com.core.ztx.entity.Organization">
     <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="login_name" jdbcType="VARCHAR" property="loginName" />
-    <result column="login_pass" jdbcType="VARCHAR" property="loginPass" />
-    <result column="org_id" jdbcType="BIGINT" property="orgId" />
-    <result column="sts" jdbcType="VARCHAR" property="sts" />
+    <result column="org_name" jdbcType="VARCHAR" property="orgName" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -67,15 +64,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, login_name, login_pass, org_id, sts
+    id, org_name
   </sql>
-  <select id="selectByExample" parameterType="com.core.ztx.entity.UserExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.core.ztx.entity.OrganizationExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from user
+    from organization
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -86,85 +83,56 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from user
+    from organization
     where id = #{id,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from user
+    delete from organization
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.core.ztx.entity.UserExample">
-    delete from user
+  <delete id="deleteByExample" parameterType="com.core.ztx.entity.OrganizationExample">
+    delete from organization
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.core.ztx.entity.User">
+  <insert id="insert" parameterType="com.core.ztx.entity.Organization">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into user (login_name, login_pass, org_id, 
-      sts)
-    values (#{loginName,jdbcType=VARCHAR}, #{loginPass,jdbcType=VARCHAR}, #{orgId,jdbcType=BIGINT}, 
-      #{sts,jdbcType=VARCHAR})
+    insert into organization (org_name)
+    values (#{orgName,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.core.ztx.entity.User">
+  <insert id="insertSelective" parameterType="com.core.ztx.entity.Organization">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into user
+    insert into organization
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="loginName != null">
-        login_name,
-      </if>
-      <if test="loginPass != null">
-        login_pass,
-      </if>
-      <if test="orgId != null">
-        org_id,
-      </if>
-      <if test="sts != null">
-        sts,
+      <if test="orgName != null">
+        org_name,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="loginName != null">
-        #{loginName,jdbcType=VARCHAR},
-      </if>
-      <if test="loginPass != null">
-        #{loginPass,jdbcType=VARCHAR},
-      </if>
-      <if test="orgId != null">
-        #{orgId,jdbcType=BIGINT},
-      </if>
-      <if test="sts != null">
-        #{sts,jdbcType=VARCHAR},
+      <if test="orgName != null">
+        #{orgName,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.core.ztx.entity.UserExample" resultType="java.lang.Long">
-    select count(*) from user
+  <select id="countByExample" parameterType="com.core.ztx.entity.OrganizationExample" resultType="java.lang.Long">
+    select count(*) from organization
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update user
+    update organization
     <set>
       <if test="record.id != null">
         id = #{record.id,jdbcType=BIGINT},
       </if>
-      <if test="record.loginName != null">
-        login_name = #{record.loginName,jdbcType=VARCHAR},
-      </if>
-      <if test="record.loginPass != null">
-        login_pass = #{record.loginPass,jdbcType=VARCHAR},
-      </if>
-      <if test="record.orgId != null">
-        org_id = #{record.orgId,jdbcType=BIGINT},
-      </if>
-      <if test="record.sts != null">
-        sts = #{record.sts,jdbcType=VARCHAR},
+      <if test="record.orgName != null">
+        org_name = #{record.orgName,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -172,40 +140,25 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update user
+    update organization
     set id = #{record.id,jdbcType=BIGINT},
-      login_name = #{record.loginName,jdbcType=VARCHAR},
-      login_pass = #{record.loginPass,jdbcType=VARCHAR},
-      org_id = #{record.orgId,jdbcType=BIGINT},
-      sts = #{record.sts,jdbcType=VARCHAR}
+      org_name = #{record.orgName,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.core.ztx.entity.User">
-    update user
+  <update id="updateByPrimaryKeySelective" parameterType="com.core.ztx.entity.Organization">
+    update organization
     <set>
-      <if test="loginName != null">
-        login_name = #{loginName,jdbcType=VARCHAR},
-      </if>
-      <if test="loginPass != null">
-        login_pass = #{loginPass,jdbcType=VARCHAR},
-      </if>
-      <if test="orgId != null">
-        org_id = #{orgId,jdbcType=BIGINT},
-      </if>
-      <if test="sts != null">
-        sts = #{sts,jdbcType=VARCHAR},
+      <if test="orgName != null">
+        org_name = #{orgName,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.core.ztx.entity.User">
-    update user
-    set login_name = #{loginName,jdbcType=VARCHAR},
-      login_pass = #{loginPass,jdbcType=VARCHAR},
-      org_id = #{orgId,jdbcType=BIGINT},
-      sts = #{sts,jdbcType=VARCHAR}
+  <update id="updateByPrimaryKey" parameterType="com.core.ztx.entity.Organization">
+    update organization
+    set org_name = #{orgName,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>
