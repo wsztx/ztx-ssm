@@ -19,12 +19,6 @@ public class RootController {
 	
 	@RequestMapping("/login")
 	public String login(){
-		logger.info("this is a ssm project");
-		return "index";
-	}
-	
-	@RequestMapping("/")
-	public String homeView(){
-		return "index";
+		return "login";
 	}
 }

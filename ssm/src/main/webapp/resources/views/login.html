@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>登录界面</title>
+<link href="../styles/loginCss/default.css" rel="stylesheet" type="text/css" />
+<!--必要样式-->
+<link href="../styles/loginCss/styles.css" rel="stylesheet" type="text/css" />
+<link href="../styles/loginCss/demo.css" rel="stylesheet" type="text/css" />
+<link href="../styles/loginCss/loaders.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src=""></script>
+
+<script type="text/javascript">
+    $(function(){
+    	getVerificationCode();
+    });
+    
+    //获取验证码
+    function getVerificationCode(){
+    	
+    }
+</script>
+
+<style type="text/css">
+   
+</style>
+
+</head>
+<body>
+	<div class='login'>
+	  <div class='login_title'>
+	    <span>用户登录</span>
+	  </div>
+	  <div class='login_fields'>
+	    <div class='login_fields__user'>
+	      <div class='icon'>
+	        <img alt="" src='../images/loginImage/user_icon_copy.png'>
+	      </div>
+	      <input name="loginName" placeholder='用户名' maxlength="16" type='text' autocomplete="off" value=""/>
+	        <div class='validation'>
+	          <img alt="" src='../images/loginImage/tick.png'>
+	        </div>
+	    </div>
+	    <div class='login_fields__password'>
+	      <div class='icon'>
+	        <img alt="" src='../images/loginImage/lock_icon_copy.png'>
+	      </div>
+	      <input name="loginPass" placeholder='密码' maxlength="16" type='text' autocomplete="off">
+	      <div class='validation'>
+	        <img alt="" src='../images/loginImage/tick.png'>
+	      </div>
+	    </div>
+	    <div class='login_fields__password'>
+	      <div class='icon'>
+	        <img alt="" src='../images/loginImage/key.png'>
+	      </div>
+	      <input name="code" placeholder='验证码' maxlength="4" type='text' name="ValidateNum" autocomplete="off">
+	      <div class='validation' style="opacity: 1; right: -5px;top: -3px;">
+          <canvas class="J_codeimg" id="myCanvas" onclick="getVerificationCode();">对不起，您的浏览器不支持canvas，请下载最新版浏览器!</canvas>
+	      </div>
+	    </div>
+	    <div class='login_fields__submit'>
+	      <input type='button' value='登   录' id="doLogin" />&nbsp;&nbsp;&nbsp;<input type='button' value='注   册' id="doRegister" />
+	    </div>
+	  </div>
+	  <div class='success'>
+	  </div>
+	  <div class='disclaimer'>
+	    <p>欢迎登录系统  更多源码：<a href="http://www.mycodes.net/" target="_blank">源码之家</a></p>
+	  </div>
+	</div>
+</body>
+</html>
