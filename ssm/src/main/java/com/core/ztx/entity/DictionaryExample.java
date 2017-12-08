@@ -373,6 +373,76 @@ public class DictionaryExample {
             addCriterion("dic_value not between", value1, value2, "dicValue");
             return (Criteria) this;
         }
+
+        public Criteria andStsIsNull() {
+            addCriterion("sts is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andStsIsNotNull() {
+            addCriterion("sts is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andStsEqualTo(String value) {
+            addCriterion("sts =", value, "sts");
+            return (Criteria) this;
+        }
+
+        public Criteria andStsNotEqualTo(String value) {
+            addCriterion("sts <>", value, "sts");
+            return (Criteria) this;
+        }
+
+        public Criteria andStsGreaterThan(String value) {
+            addCriterion("sts >", value, "sts");
+            return (Criteria) this;
+        }
+
+        public Criteria andStsGreaterThanOrEqualTo(String value) {
+            addCriterion("sts >=", value, "sts");
+            return (Criteria) this;
+        }
+
+        public Criteria andStsLessThan(String value) {
+            addCriterion("sts <", value, "sts");
+            return (Criteria) this;
+        }
+
+        public Criteria andStsLessThanOrEqualTo(String value) {
+            addCriterion("sts <=", value, "sts");
+            return (Criteria) this;
+        }
+
+        public Criteria andStsLike(String value) {
+            addCriterion("sts like", value, "sts");
+            return (Criteria) this;
+        }
+
+        public Criteria andStsNotLike(String value) {
+            addCriterion("sts not like", value, "sts");
+            return (Criteria) this;
+        }
+
+        public Criteria andStsIn(List<String> values) {
+            addCriterion("sts in", values, "sts");
+            return (Criteria) this;
+        }
+
+        public Criteria andStsNotIn(List<String> values) {
+            addCriterion("sts not in", values, "sts");
+            return (Criteria) this;
+        }
+
+        public Criteria andStsBetween(String value1, String value2) {
+            addCriterion("sts between", value1, value2, "sts");
+            return (Criteria) this;
+        }
+
+        public Criteria andStsNotBetween(String value1, String value2) {
+            addCriterion("sts not between", value1, value2, "sts");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

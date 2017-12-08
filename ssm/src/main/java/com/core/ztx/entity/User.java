@@ -7,6 +7,8 @@ public class User {
 
     private String loginPass;
 
+    private String sts;
+
     public Long getId() {
         return id;
     }
@@ -29,6 +31,14 @@ public class User {
 
     public void setLoginPass(String loginPass) {
         this.loginPass = loginPass == null ? null : loginPass.trim();
+    }
+
+    public String getSts() {
+        return sts;
+    }
+
+    public void setSts(String sts) {
+        this.sts = sts == null ? null : sts.trim();
     }
 
 	public User(String loginName, String loginPass) {

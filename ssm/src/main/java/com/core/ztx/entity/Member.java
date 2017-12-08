@@ -7,6 +7,8 @@ public class Member {
 
     private String memberType;
 
+    private String sts;
+
     public Long getId() {
         return id;
     }
@@ -29,5 +31,13 @@ public class Member {
 
     public void setMemberType(String memberType) {
         this.memberType = memberType == null ? null : memberType.trim();
+    }
+
+    public String getSts() {
+        return sts;
+    }
+
+    public void setSts(String sts) {
+        this.sts = sts == null ? null : sts.trim();
     }
 }

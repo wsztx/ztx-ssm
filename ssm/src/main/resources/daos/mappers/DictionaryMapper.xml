@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.core.ztx.dao.mapper.UserMapper">
-  <resultMap id="BaseResultMap" type="com.core.ztx.entity.User">
+<mapper namespace="com.core.ztx.dao.mapper.DictionaryMapper">
+  <resultMap id="BaseResultMap" type="com.core.ztx.entity.Dictionary">
     <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="login_name" jdbcType="VARCHAR" property="loginName" />
-    <result column="login_pass" jdbcType="VARCHAR" property="loginPass" />
+    <result column="dic_type" jdbcType="VARCHAR" property="dicType" />
+    <result column="dic_text" jdbcType="VARCHAR" property="dicText" />
+    <result column="dic_value" jdbcType="VARCHAR" property="dicValue" />
+    <result column="sts" jdbcType="VARCHAR" property="sts" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -65,15 +67,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, login_name, login_pass
+    id, dic_type, dic_text, dic_value, sts
   </sql>
-  <select id="selectByExample" parameterType="com.core.ztx.entity.UserExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.core.ztx.entity.DictionaryExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from user
+    from dictionary
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -84,65 +86,85 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from user
+    from dictionary
     where id = #{id,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from user
+    delete from dictionary
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.core.ztx.entity.UserExample">
-    delete from user
+  <delete id="deleteByExample" parameterType="com.core.ztx.entity.DictionaryExample">
+    delete from dictionary
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.core.ztx.entity.User">
+  <insert id="insert" parameterType="com.core.ztx.entity.Dictionary">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into user (login_name, login_pass)
-    values (#{loginName,jdbcType=VARCHAR}, #{loginPass,jdbcType=VARCHAR})
+    insert into dictionary (dic_type, dic_text, dic_value, 
+      sts)
+    values (#{dicType,jdbcType=VARCHAR}, #{dicText,jdbcType=VARCHAR}, #{dicValue,jdbcType=VARCHAR}, 
+      #{sts,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.core.ztx.entity.User">
+  <insert id="insertSelective" parameterType="com.core.ztx.entity.Dictionary">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into user
+    insert into dictionary
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="loginName != null">
-        login_name,
+      <if test="dicType != null">
+        dic_type,
       </if>
-      <if test="loginPass != null">
-        login_pass,
+      <if test="dicText != null">
+        dic_text,
+      </if>
+      <if test="dicValue != null">
+        dic_value,
+      </if>
+      <if test="sts != null">
+        sts,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="loginName != null">
-        #{loginName,jdbcType=VARCHAR},
+      <if test="dicType != null">
+        #{dicType,jdbcType=VARCHAR},
       </if>
-      <if test="loginPass != null">
-        #{loginPass,jdbcType=VARCHAR},
+      <if test="dicText != null">
+        #{dicText,jdbcType=VARCHAR},
+      </if>
+      <if test="dicValue != null">
+        #{dicValue,jdbcType=VARCHAR},
+      </if>
+      <if test="sts != null">
+        #{sts,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.core.ztx.entity.UserExample" resultType="java.lang.Long">
-    select count(*) from user
+  <select id="countByExample" parameterType="com.core.ztx.entity.DictionaryExample" resultType="java.lang.Long">
+    select count(*) from dictionary
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update user
+    update dictionary
     <set>
       <if test="record.id != null">
         id = #{record.id,jdbcType=BIGINT},
       </if>
-      <if test="record.loginName != null">
-        login_name = #{record.loginName,jdbcType=VARCHAR},
+      <if test="record.dicType != null">
+        dic_type = #{record.dicType,jdbcType=VARCHAR},
       </if>
-      <if test="record.loginPass != null">
-        login_pass = #{record.loginPass,jdbcType=VARCHAR},
+      <if test="record.dicText != null">
+        dic_text = #{record.dicText,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dicValue != null">
+        dic_value = #{record.dicValue,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sts != null">
+        sts = #{record.sts,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -150,30 +172,40 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update user
+    update dictionary
     set id = #{record.id,jdbcType=BIGINT},
-      login_name = #{record.loginName,jdbcType=VARCHAR},
-      login_pass = #{record.loginPass,jdbcType=VARCHAR}
+      dic_type = #{record.dicType,jdbcType=VARCHAR},
+      dic_text = #{record.dicText,jdbcType=VARCHAR},
+      dic_value = #{record.dicValue,jdbcType=VARCHAR},
+      sts = #{record.sts,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.core.ztx.entity.User">
-    update user
+  <update id="updateByPrimaryKeySelective" parameterType="com.core.ztx.entity.Dictionary">
+    update dictionary
     <set>
-      <if test="loginName != null">
-        login_name = #{loginName,jdbcType=VARCHAR},
+      <if test="dicType != null">
+        dic_type = #{dicType,jdbcType=VARCHAR},
       </if>
-      <if test="loginPass != null">
-        login_pass = #{loginPass,jdbcType=VARCHAR},
+      <if test="dicText != null">
+        dic_text = #{dicText,jdbcType=VARCHAR},
+      </if>
+      <if test="dicValue != null">
+        dic_value = #{dicValue,jdbcType=VARCHAR},
+      </if>
+      <if test="sts != null">
+        sts = #{sts,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.core.ztx.entity.User">
-    update user
-    set login_name = #{loginName,jdbcType=VARCHAR},
-      login_pass = #{loginPass,jdbcType=VARCHAR}
+  <update id="updateByPrimaryKey" parameterType="com.core.ztx.entity.Dictionary">
+    update dictionary
+    set dic_type = #{dicType,jdbcType=VARCHAR},
+      dic_text = #{dicText,jdbcType=VARCHAR},
+      dic_value = #{dicValue,jdbcType=VARCHAR},
+      sts = #{sts,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

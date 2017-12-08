@@ -9,6 +9,8 @@ public class Dictionary {
 
     private String dicValue;
 
+    private String sts;
+
     public Long getId() {
         return id;
     }
@@ -39,5 +41,13 @@ public class Dictionary {
 
     public void setDicValue(String dicValue) {
         this.dicValue = dicValue == null ? null : dicValue.trim();
+    }
+
+    public String getSts() {
+        return sts;
+    }
+
+    public void setSts(String sts) {
+        this.sts = sts == null ? null : sts.trim();
     }
 }
