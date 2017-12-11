@@ -40,4 +40,11 @@ public class Member {
     public void setSts(String sts) {
         this.sts = sts == null ? null : sts.trim();
     }
+
+	@Override
+	public String toString() {
+		return "Member [id=" + id + ", userId=" + userId + ", memberType=" + memberType + ", sts=" + sts + "]";
+	}
+    
+    
 }

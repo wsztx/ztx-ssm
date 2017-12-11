@@ -11,6 +11,7 @@
 
         http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
 
+<beans>
     <!-- 自动扫描 -->
     <context:component-scan base-package="com.core.ztx.service"/>
     <!-- 配置数据源 -->
@@ -20,8 +21,10 @@
         class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">  
         <property name="location" value="classpath:spring/db.properties" />  
     </bean>  
+</beans>
 
-    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+    <beans profile="pro">
+            <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
         <property name="driverClassName" value="${driver}"/>
         <property name="url" value="${url}"/>
         <!-- 改为你的地址即可 -->
@@ -38,7 +41,29 @@
         <!-- 获取连接最大等待时间 -->  
         <property name="maxWait" value="${maxWait}"></property>
     </bean>
+    </beans>
+    
+    <beans profile="test">
+        <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+        <property name="driverClassName" value="${driver}"/>
+        <property name="url" value="${url}"/>
+        <!-- 改为你的地址即可 -->
+        <property name="username" value="${username}"/>
+        <property name="password" value="${password}"/>
+        <!-- 初始化连接大小 -->  
+        <property name="initialSize" value="${initialSize}"></property>  
+        <!-- 连接池最大数量 -->  
+        <property name="maxActive" value="${maxActive}"></property>  
+        <!-- 连接池最大空闲 -->  
+        <property name="maxIdle" value="${maxIdle}"></property>  
+        <!-- 连接池最小空闲 -->  
+        <property name="minIdle" value="${minIdle}"></property>  
+        <!-- 获取连接最大等待时间 -->  
+        <property name="maxWait" value="${maxWait}"></property>
+    </bean>
+    </beans>
 
+<beans>
     <!-- 配置mybatis的sqlSessionFactory -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
@@ -81,4 +106,5 @@
                       expression="(execution(* com.core.ztx.service..*.*(..)))"/>
         <aop:advisor advice-ref="txAdvice" pointcut-ref="serviceOperation"/>
     </aop:config> 
+</beans>
 </beans>

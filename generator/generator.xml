@@ -30,7 +30,7 @@
         </javaClientGenerator>
         <!-- 多个表直接复制下面的，更改tableName和domainObjectName就可以-->  
         <!-- <table tableName="member" domainObjectName="Member" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"> -->
-		<table tableName="dictionary" domainObjectName="Dictionary">
+		<table tableName="user" domainObjectName="User">
 		    <!-- 实体类驼峰式 -->
 		    <property name="useActualColumnNames" value="false"/>
             <generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()" identity="true"/>

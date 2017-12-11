@@ -1,6 +1,15 @@
 package com.core.ztx.test;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import com.core.ztx.entity.Member;
+
 public class Test extends BaseJunit4Test {
+	
+	@Autowired
+	private Member member;
 
 //	@Autowired
 //	private UserMapper userMapper;
@@ -15,7 +24,12 @@ public class Test extends BaseJunit4Test {
     }  */
     
     @org.junit.Test
-    public void md5Test(){
-    	
+    public void profileTest(){
+    	System.out.println("kkkkkkkkkkkkkkkk");
+    	if(member!=null){
+    		System.out.println(member.toString());
+    	}else{
+    		System.out.println("sssssssssss");
+    	}
     }
 }

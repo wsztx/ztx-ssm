@@ -5,10 +5,12 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.core.ztx.entity.Member;
 import com.core.ztx.service.UserService;
 
 @Controller
@@ -18,8 +20,16 @@ public class UserController {
 	@Resource
 	private UserService userService;
 	
+	@Autowired(required=false)
+	private Member member;
+	
 	@RequestMapping("/test")
 	public String test() throws Exception{
+		if(member==null){
+			System.out.println("ssssssssssssss");
+		}else{
+			System.out.println(member.toString());
+		}
 		userService.insertTest();
 		return "index";
 	}
