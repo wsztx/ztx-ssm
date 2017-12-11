@@ -19,7 +19,13 @@
     <!-- 引入配置文件 -->  
     <bean id="propertyConfigurer"  
         class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">  
-        <property name="location" value="classpath:spring/db.properties" />  
+        <property name="locations">
+            <list>
+                <value>classpath:spring/db.properties</value>
+                <value>classpath:spring/config.properties</value>
+            </list>
+        </property>
+        <property name="fileEncoding" value="utf-8"></property>
     </bean>  
 </beans>
 
@@ -85,9 +91,9 @@
         <property name="dataSource" ref="dataSource" />  
     </bean> 
     
-        <!-- 配置事务通知属性 -->
+<!--          配置事务通知属性
     <tx:advice id="txAdvice" transaction-manager="transactionManager">
-        <!-- 定义事务传播属性 -->
+        定义事务传播属性
         <tx:attributes>
 			<tx:method name="save*" propagation="REQUIRED"/>
 			<tx:method name="insert*" propagation="REQUIRED"/>
@@ -100,11 +106,11 @@
         </tx:attributes>
     </tx:advice>
 
-    <!-- 配置事务切面 -->
+    配置事务切面
     <aop:config>
         <aop:pointcut id="serviceOperation"
                       expression="(execution(* com.core.ztx.service..*.*(..)))"/>
         <aop:advisor advice-ref="txAdvice" pointcut-ref="serviceOperation"/>
-    </aop:config> 
+    </aop:config> -->
 </beans>
 </beans>

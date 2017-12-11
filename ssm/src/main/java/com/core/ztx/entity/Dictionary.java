@@ -1,7 +1,7 @@
 package com.core.ztx.entity;
 
 public class Dictionary {
-    private Long id;
+	private Long id;
 
     private String dicType;
 
@@ -50,4 +50,10 @@ public class Dictionary {
     public void setSts(String sts) {
         this.sts = sts == null ? null : sts.trim();
     }
+    
+    @Override
+	public String toString() {
+		return "Dictionary [id=" + id + ", dicType=" + dicType + ", dicText=" + dicText + ", dicValue=" + dicValue
+				+ ", sts=" + sts + "]";
+	}
 }

@@ -22,7 +22,7 @@
     <mvc:annotation-driven/>
 
     <!-- 使用注解的包，包括子集 -->
-    <context:component-scan base-package="com.core.ztx.controller"/>
+    <!-- <context:component-scan base-package="com.core.ztx.controller"/> -->
     <context:component-scan base-package="com.core.ztx.system"/>
 
     <!-- html视图解析器 必须先配置freemarkerConfig,注意html是没有prefix前缀属性的-->  

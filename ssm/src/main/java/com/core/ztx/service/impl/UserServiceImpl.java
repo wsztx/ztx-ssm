@@ -1,13 +1,15 @@
 package com.core.ztx.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.core.ztx.dao.mapper.UserMapper;
 import com.core.ztx.entity.User;
 import com.core.ztx.service.UserService;
 
-@Service
+@Service("userService")
+@Qualifier("userService")
 public class UserServiceImpl implements UserService {
 	
 	@Autowired

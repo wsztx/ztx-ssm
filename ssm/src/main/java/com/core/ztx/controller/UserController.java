@@ -3,13 +3,12 @@ package com.core.ztx.controller;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.annotation.Resource;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.core.ztx.annotation.UserAnnotation;
 import com.core.ztx.entity.Member;
 import com.core.ztx.service.UserService;
 
@@ -17,7 +16,8 @@ import com.core.ztx.service.UserService;
 @RequestMapping("/user")
 public class UserController {
 	
-	@Resource
+	@Autowired
+	@UserAnnotation
 	private UserService userService;
 	
 	@Autowired(required=false)

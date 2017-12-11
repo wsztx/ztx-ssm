@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd">
 
     <bean class="com.core.ztx.system.SpringConfig"></bean>
 
@@ -9,4 +11,19 @@
 	<import resource="spring-mybatis.xml"/>
 	<import resource="spring-service.xml"/>
 
+    <bean id="dictionary" class="com.core.ztx.entity.Dictionary"></bean>
+    
+    <aop:aspectj-autoproxy />
+    <bean id="myAspectJ" class="com.core.ztx.system.MyAspectJ"></bean>
+    <aop:config>
+        <aop:aspect ref="myAspectJ">
+            <aop:pointcut expression="execution(** com.core.ztx.service.impl.UserServiceImpl2.insertTest(..))" id="insertTest"/>
+            
+            <aop:before method="doBefore1()" pointcut-ref="insertTest"/>
+            
+            <aop:before method="doBefore2()" pointcut-ref="insertTest"/>
+            
+            <aop:after method="doAfter" pointcut-ref="insertTest"/>
+        </aop:aspect>
+    </aop:config>
 </beans>
