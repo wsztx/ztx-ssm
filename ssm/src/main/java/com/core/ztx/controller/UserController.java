@@ -3,42 +3,53 @@ package com.core.ztx.controller;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
+
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.core.ztx.annotation.UserAnnotation;
-import com.core.ztx.entity.Member;
+import com.core.ztx.comm.Constants;
+import com.core.ztx.comm.ResModel;
+import com.core.ztx.entity.User;
 import com.core.ztx.service.UserService;
 
 @Controller
 @RequestMapping("/user")
 public class UserController {
 	
-	@Autowired
-	@UserAnnotation
+	@Resource
 	private UserService userService;
 	
-	@Autowired(required=false)
-	private Member member;
-	
-	@RequestMapping("/test")
-	public String test() throws Exception{
-		if(member==null){
-			System.out.println("ssssssssssssss");
-		}else{
-			System.out.println(member.toString());
-		}
-		userService.insertTest();
-		return "index";
-	}
-
+	@RequestMapping(value="doLogin")
 	@ResponseBody
-	@RequestMapping("/login")
-	public Map login(){
-		Map resultMap = new HashMap();
+	public ResModel doLogin(HttpServletRequest request, @Valid User user, Errors errors){
+		ResModel model = new ResModel();
+		if(errors.hasErrors()){
+			model.setCode("error");
+			model.setMessage("参数验证失败");
+			return model;
+		}
+		User loginUser = userService.login(user.getLoginName(), user.getLoginPass());
+		if(loginUser==null){
+			model.setCode("error");
+			model.setMessage("用户密码错误");
+		}else{
+			request.getSession().setAttribute("user", loginUser);
+			request.getSession().setMaxInactiveInterval(Constants.SESSION_TIME_OUT);
+			model.setCode("success");
+			model.setMessage("登录成功");
+		}
+		return model;
+	}
+	
+	@RequestMapping(value="doLogout")
+	public Map<String, Object> doLogout(){
+		Map<String, Object> map = new HashMap<String, Object>();
 		
-		return resultMap;
+		return map;
 	}
 }

@@ -34,9 +34,10 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 	          
 	        User user =  (User)request.getSession().getAttribute("user");   
 	        if(user == null){  
-	            log.info("Interceptor：跳转到login页面！");  
-	            request.getRequestDispatcher("/user/login.do").forward(request, response);  
-	            return false;  
+	            log.info("Interceptor：未登录,跳转到login页面！");  
+	            response.sendRedirect(request.getContextPath()+"/login.do");
+	            //request.getRequestDispatcher("/login.do").forward(request, response);  
+	            return false;
 	        }else{
 	        	return true;     
 	        }
@@ -54,7 +55,7 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 	    	User user =  (User)request.getSession().getAttribute("user");
 	        if(user!=null && modelAndView != null){  //加入当前时间    
 	            modelAndView.addObject("user", "user");    
-	        }    
+	        }
 	    }    
 	    
 	    /**  

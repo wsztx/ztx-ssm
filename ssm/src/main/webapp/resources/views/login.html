@@ -1,13 +1,16 @@
+<#assign base=request.contextPath />
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>登录界面</title>
-<link href="../styles/loginCss/default.css" rel="stylesheet" type="text/css" />
+<link href="${base}/resources/styles/loginCss/default.css" rel="stylesheet" type="text/css" />
 <!--必要样式-->
-<link href="../styles/loginCss/styles.css" rel="stylesheet" type="text/css" />
-<link href="../styles/loginCss/demo.css" rel="stylesheet" type="text/css" />
-<link href="../styles/loginCss/loaders.css" rel="stylesheet" type="text/css" />
+<link href="${base}/resources/styles/loginCss/styles.css" rel="stylesheet" type="text/css" />
+<link href="${base}/resources/styles/loginCss/demo.css" rel="stylesheet" type="text/css" />
+<link href="${base}/resources/styles/loginCss/loaders.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="${base}/resources/plugins/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="${base}/resources/plugins/jquery.blockUI.js"></script>
 <script type="text/javascript" src=""></script>
 
 <script type="text/javascript">
@@ -19,6 +22,61 @@
     function getVerificationCode(){
     	
     }
+    
+    //登录
+    function doLogin(){
+    	$.ajax({
+    		url:"${base}/user/doLogin.do",
+    		type:"POST",
+    		dataType:"json",
+    		data:$("#loginForm").serialize(),
+    		beforeSend:function(){
+    			$.blockUI({ message: '<h1><img src="${base}/resources/images/busy.png" /> Just a moment...</h1>' });
+    		},
+    		complete:function(){
+    			$.unblockUI();
+    		},
+    		error:function(){
+    			alert("error");
+    		},
+    		success:function(reply){
+    			if(reply.code=="success"){
+    				location.href = "${base}/index.do";
+    			}else{
+    				alert(reply.message);
+    			}
+    		}
+    	});
+    }
+    
+    //注册页面
+    function toRegister(){
+    	
+    }
+    
+    function doTest(){
+    	$.ajax({
+    		url:"${base}/test/12.do",
+    		type:"GET",
+    		dataType:"json",
+    		beforeSend:function(){
+    			$.blockUI({ message: '<h1><img src="${base}/resources/images/busy.png" /> Just a moment...</h1>' });
+    		},
+    		complete:function(){
+    			$.unblockUI();
+    		},
+    		error:function(){
+    			alert("error");
+    		},
+    		success:function(reply){
+    			if(reply.code=="success"){
+    				alert(reply.data.user.loginName);
+    			}else{
+    				alert(reply.message);
+    			}
+    		}
+    	});
+    }
 </script>
 
 <style type="text/css">
@@ -27,6 +85,7 @@
 
 </head>
 <body>
+    <form id="loginForm" method="post">
 	<div class='login'>
 	  <div class='login_title'>
 	    <span>用户登录</span>
@@ -34,40 +93,44 @@
 	  <div class='login_fields'>
 	    <div class='login_fields__user'>
 	      <div class='icon'>
-	        <img alt="" src='../images/loginImage/user_icon_copy.png'>
+	        <img alt="" src='${base}/resources/images/loginImage/user_icon_copy.png' />
 	      </div>
 	      <input name="loginName" placeholder='用户名' maxlength="16" type='text' autocomplete="off" value=""/>
 	        <div class='validation'>
-	          <img alt="" src='../images/loginImage/tick.png'>
+	          <img alt="" src='${base}/resources/images/loginImage/tick.png' />
 	        </div>
 	    </div>
 	    <div class='login_fields__password'>
 	      <div class='icon'>
-	        <img alt="" src='../images/loginImage/lock_icon_copy.png'>
+	        <img alt="" src='${base}/resources/images/loginImage/lock_icon_copy.png' />
 	      </div>
-	      <input name="loginPass" placeholder='密码' maxlength="16" type='text' autocomplete="off">
+	      <input name="loginPass" placeholder='密码' maxlength="16" type='text' autocomplete="off" />
 	      <div class='validation'>
-	        <img alt="" src='../images/loginImage/tick.png'>
+	        <img alt="" src='${base}/resources/images/loginImage/tick.png' />
 	      </div>
 	    </div>
 	    <div class='login_fields__password'>
 	      <div class='icon'>
-	        <img alt="" src='../images/loginImage/key.png'>
+	        <img alt="" src='${base}/resources/images/loginImage/key.png' />
 	      </div>
-	      <input name="code" placeholder='验证码' maxlength="4" type='text' name="ValidateNum" autocomplete="off">
+	      <input name="code" placeholder='验证码' maxlength="4" type='text' name="ValidateNum" autocomplete="off" />
 	      <div class='validation' style="opacity: 1; right: -5px;top: -3px;">
           <canvas class="J_codeimg" id="myCanvas" onclick="getVerificationCode();">对不起，您的浏览器不支持canvas，请下载最新版浏览器!</canvas>
 	      </div>
 	    </div>
 	    <div class='login_fields__submit'>
-	      <input type='button' value='登   录' id="doLogin" />&nbsp;&nbsp;&nbsp;<input type='button' value='注   册' id="doRegister" />
+	      <input type='button' value='登   录' id="login" onclick="doLogin();" />&nbsp;&nbsp;&nbsp;<input type='button' value='注   册' id="register" onclick = "toRegister();" />
+	    </div>
+	    <div class='login_fields__submit'>
+	      <input type="button" value="Test" onclick="doTest();" />
 	    </div>
 	  </div>
 	  <div class='success'>
 	  </div>
 	  <div class='disclaimer'>
-	    <p>欢迎登录系统  更多源码：<a href="http://www.mycodes.net/" target="_blank">源码之家</a></p>
+	    <p>欢迎登录系统  更多信息请关注：<a href="http://www.mycodes.net/" target="_blank">源码之家</a></p>
 	  </div>
 	</div>
+	</form>
 </body>
 </html>

@@ -17,7 +17,6 @@ import com.core.ztx.entity.Dictionary;
 import com.core.ztx.entity.Member;
 
 @Configuration
-@ComponentScan(basePackageClasses=ControllerScan.class)
 public class SpringConfig {
 	
 	@Autowired

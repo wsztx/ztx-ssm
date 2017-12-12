@@ -2,6 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.core.ztx.dao.UserDao">
 
-
+<select id="getUserByNameAndPass" resultMap="com.core.ztx.dao.mapper.UserMapper.BaseResultMap">
+    select * from user where sts = '1' and login_name = #{loginName} and login_pass = #{loginPass}
+</select>
 
 </mapper>

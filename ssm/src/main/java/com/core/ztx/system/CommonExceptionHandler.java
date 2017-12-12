@@ -19,7 +19,7 @@ public class CommonExceptionHandler {
     public ModelAndView processValidationError(Exception ex) {
         logger.error("操作失败", ex);
 
-        ModelAndView mav = new ModelAndView(Constants.SystemUrl.web_error.getUrl());
+        ModelAndView mav = new ModelAndView(Constants.SystemUrl.error.getUrl());
         mav.addObject("errorName", ex.getClass().getSimpleName());
         mav.addObject("errorMessage", ex.getMessage());
         return mav;
