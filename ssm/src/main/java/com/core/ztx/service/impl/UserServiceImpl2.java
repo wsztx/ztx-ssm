@@ -34,4 +34,10 @@ public class UserServiceImpl2 implements UserService {
 		return userMapper.selectByPrimaryKey(id);
 	}
 
+	@Override
+	public Long countByUser(User user) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

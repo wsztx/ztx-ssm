@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import com.core.ztx.dao.UserDao;
 import com.core.ztx.dao.mapper.UserMapper;
 import com.core.ztx.entity.User;
+import com.core.ztx.entity.UserExample;
 import com.core.ztx.service.UserService;
 import com.core.ztx.util.MD5Util;
 
@@ -38,7 +39,18 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User getUserById(Long id) {
-		// TODO Auto-generated method stub
 		return userMapper.selectByPrimaryKey(id);
+	}
+
+	@Override
+	public Long countByUser(User user) {
+		if(user!=null){
+			UserExample example = new UserExample();
+			example.createCriteria()
+			    .andLoginNameEqualTo(user.getLoginName()==null?"":user.getLoginName());
+			return userMapper.countByExample(example);
+		}else{
+			return 0L;
+		}
 	}
 }

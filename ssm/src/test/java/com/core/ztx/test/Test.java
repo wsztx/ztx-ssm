@@ -3,9 +3,8 @@ package com.core.ztx.test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.core.ztx.annotation.UserAnnotation;
-import com.core.ztx.entity.Dictionary;
+import com.core.ztx.comm.Page;
 import com.core.ztx.service.UserService;
-import com.core.ztx.util.spring.SpringApplicationContextUtils;
 
 public class Test extends BaseJunit4Test {
 	
@@ -55,8 +54,14 @@ public class Test extends BaseJunit4Test {
     	System.out.println(dic.toString());
     }*/
 	
-    @org.junit.Test
-    public void AOPTest(){
-    	userService.insertTest();
-    }
+//    @org.junit.Test
+//    public void AOPTest(){
+//    	userService.insertTest();
+//    }
+	
+//    @org.junit.Test
+//    public void pageTest(){
+//    	Page page = new Page(); 
+//    	System.out.println(page);
+//    }
 }
